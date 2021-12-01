@@ -1,0 +1,13 @@
+{
+  "name": "01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "p1.js",
+  "type": "module",
+  "scripts": {
+    "one": "node p1.js",
+	"two": "node p2.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
