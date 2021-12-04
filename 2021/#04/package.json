@@ -1,0 +1,19 @@
+{
+  "name": "04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "one": "tsc && node p1/p1.js",
+    "two": "tsc && node p2/p2.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.11"
+  }
+}
