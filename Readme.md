@@ -4,18 +4,8 @@ This is my personal Advent of Code repository with my solutions
 
 ### Days of my existence
 
-|    | 2019 | 2020 | 2021 |
-|----|------|------|------|
-| 1  |   x  |   x  |   x  |
-| 2  |   x  |   x  |   x  |
-| 3  |   x  |   x  |   x  |
-| 4  |   x  |   x  |   x  |
-| 5  |      |   x  |   x  |
-| 6  |      |   x  |   x  |
-| 7  |      |   x  |   x  |
-| 8  |      |   x  |   x  |
-| 9  |      |   x  |   x  |
-| 10 |      |   x  |      |
-| 11 |      |   x  |      |
-| 12 |      |   x  |      |
-| 13 |      |   x  |      |
+|      | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 |
+|------|----|----|----|----|----|----|----|----|----|----|----|----|----|
+| 2019 | xx | xx |    |    |    |    |    |    |    |    |    |    |    |
+| 2020 | xx | xx | xx | xx | xx | xx | xx | xx | xx | xx | x  | xx | xx |
+| 2021 | xx | xx | xx | xx | xx | xx | xx | xx | xx |    |    |    |    |
