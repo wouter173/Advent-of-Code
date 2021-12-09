@@ -2,11 +2,7 @@
 
 This is my personal Advent of Code repository with my solutions
 
-### Years I participated:
-
-1.  2019
-2.  2020
-3.  2021
+### Days of my existence
 
 |    | 2019 | 2020 | 2021 |
 |----|------|------|------|
