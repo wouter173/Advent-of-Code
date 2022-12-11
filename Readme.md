@@ -9,4 +9,4 @@ This is my personal Advent of Code repository with my solutions
 | 2019 | xx  | xx  |     |     |     |     |     |     |     |     |     |     |     |     |
 | 2020 | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | x   | xx  | xx  |     |
 | 2021 | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  |
-| 2022 | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  |     |     |     |     |     |     |
+| 2022 | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  |     |     |     |
