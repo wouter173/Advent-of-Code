@@ -9,13 +9,7 @@ const seeds = input
   .trim()
   .split(" ")
   .map((x) => parseInt(x))
-  .reduce<[number, number?][]>(
-    (acc, cur) =>
-      acc.at(-1)?.length == 1
-        ? [...acc.slice(0, -1), [acc.at(-1)![0], cur]]
-        : [...acc, [cur]],
-    []
-  );
+  .reduce<[number, number?][]>((acc, cur) => (acc.at(-1)?.length == 1 ? [...acc.slice(0, -1), [acc.at(-1)![0], cur]] : [...acc, [cur]]), []);
 
 print(seeds);
 
@@ -46,27 +40,66 @@ for (const key of keys) {
 
     const currentStart = seed[0];
     const currentSize = seed[1];
-    // console.log(currentStart);
+    let changedAnything = false;
 
     for (const [lookupTo, lookupFrom, lookupSize] of ranges[key]) {
-      console.log(lookupTo, lookupFrom, lookupSize);
-      if (
-        currentStart >= lookupFrom &&
-        currentStart <= lookupFrom + lookupSize
-      ) {
+      console.log(currentStart, "->", currentStart + currentSize, ", inside of?", lookupFrom, "->", lookupFrom + lookupSize, ", maps to", lookupTo, "->", lookupTo + lookupSize, key);
+      if (currentStart < lookupFrom && currentStart + currentSize > lookupFrom + lookupSize) {
+        console.log("hit", "first");
+        changedAnything = true;
+
+        console.log("current", currentStart, lookupFrom - currentStart);
+        currentStep.push([currentStart, lookupFrom - currentStart]);
+
+        console.log("next", lookupTo, lookupSize);
+        nextStep.push([lookupTo, lookupSize]);
+
+        console.log("current", lookupFrom + lookupSize, currentStart + currentSize - (lookupFrom + lookupSize));
+        currentStep.push([lookupFrom + lookupSize, currentStart + currentSize - (lookupFrom + lookupSize)]);
+        break;
+      } else if (currentStart >= lookupFrom && currentStart < lookupFrom + lookupSize && currentSize < lookupSize) {
+        console.log("hit", "second");
+        changedAnything = true;
+
+        console.log("next", lookupTo + (currentStart - lookupFrom), currentSize);
         nextStep.push([lookupTo + (currentStart - lookupFrom), currentSize]);
         break;
-      } else {
-        nextStep.push([currentStart, currentSize]);
+      } else if (lookupFrom + lookupSize < currentStart + currentSize && currentStart < lookupFrom + lookupSize && lookupFrom < currentStart) {
+        // matches: 50 -> 60 inside of? 45 -> 55 maps to 10 -> 20
+        // upper bound dangling
+
+        changedAnything = true;
+        console.log("hit", "third");
+
+        console.log("current", lookupFrom + lookupSize, currentSize - (currentStart - lookupFrom));
+        nextStep.push([lookupFrom + lookupSize, currentSize - (currentStart - lookupFrom)]);
+
+        console.log("next", lookupTo, currentStart - lookupFrom);
+        nextStep.push([lookupTo, currentStart - lookupFrom]);
+        break;
+      } else if (lookupFrom + lookupSize > currentStart && currentStart < lookupFrom && currentStart + currentSize > lookupFrom) {
+        // matches: 50 -> 60 inside of? 55 -> 65 maps to 10 -> 20
+        // lower bound dangling
+
+        changedAnything = true;
+        console.log("hit", "fourth");
+        console.log("current", currentStart, lookupFrom - currentStart);
+        currentStep.push([currentStart, lookupFrom - currentStart]);
+
+        console.log("next", lookupTo, currentStart + currentSize - lookupFrom);
+        nextStep.push([lookupTo, currentStart + currentSize - lookupFrom]);
+
         break;
       }
     }
-  }
 
-  console.log(key, nextStep);
+    if (changedAnything) continue;
+    nextStep.push(seed);
+  }
 
   currentStep = nextStep;
   nextStep = [];
 }
 
 console.log(currentStep);
+console.log(Math.min(...currentStep.map((x) => x[0])));
