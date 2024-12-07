@@ -11,4 +11,4 @@ This is my personal Advent of Code repository with my solutions
 | 2021 | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  |     |     |     |     |     |     |     |     |     |     |     |
 | 2022 | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  | xx  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
 | 2023 | xx  | xx  | xx  | xx  | x   | xx  | xx  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| 2024 | xx  | xx  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
+| 2024 | xx  | xx  | xx  | xx  | xx  | xx  | xx  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
