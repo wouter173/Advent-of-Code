@@ -1,85 +1,85 @@
 const input = Deno.readTextFileSync("./input.txt");
 
-function runProgram(program: number[], registerA: number, registerB: number, registerC: number) {
-  let instructionPointer = 0;
-  const outputs: number[] = [];
+function runProgram(program: bigint[], registerA: bigint, registerB: bigint, registerC: bigint) {
+  let instructionPointer = 0n;
+  const outputs: bigint[] = [];
 
-  function combo(operand: number) {
-    if (operand <= 3) return operand;
-    if (operand === 4) return registerA;
-    if (operand === 5) return registerB;
-    if (operand === 6) return registerC;
+  function combo(operand: bigint) {
+    if (operand <= 3n) return operand;
+    if (operand === 4n) return registerA;
+    if (operand === 5n) return registerB;
+    if (operand === 6n) return registerC;
     throw new Error("unreachable combo operand used");
   }
 
-  function adv(operand: number) {
+  function adv(operand: bigint) {
     const comboOperand = combo(operand);
-    registerA = Math.trunc(registerA / 2 ** comboOperand);
+    registerA = registerA / 2n ** comboOperand;
   }
 
-  function bxl(operand: number) {
+  function bxl(operand: bigint) {
     registerB = operand ^ registerB;
   }
 
-  function bst(operand: number) {
+  function bst(operand: bigint) {
     const comboOperand = combo(operand);
-    registerB = comboOperand % 8;
+    registerB = comboOperand % 8n;
   }
 
-  function jnz(operand: number) {
-    if (registerA == 0) return;
-    instructionPointer = operand - 2;
+  function jnz(operand: bigint) {
+    if (registerA == 0n) return;
+    instructionPointer = operand - 2n;
   }
 
-  function bxc(_operand: number) {
+  function bxc(_operand: bigint) {
     registerB = registerB ^ registerC;
   }
 
-  function out(operand: number) {
+  function out(operand: bigint) {
     const comboOperand = combo(operand);
-    outputs.push(comboOperand % 8);
+    outputs.push(comboOperand % 8n);
   }
 
-  function bdv(operand: number) {
+  function bdv(operand: bigint) {
     const comboOperand = combo(operand);
-    registerB = Math.trunc(registerA / 2 ** comboOperand);
+    registerB = registerA / 2n ** comboOperand;
   }
 
-  function cdv(operand: number) {
+  function cdv(operand: bigint) {
     const comboOperand = combo(operand);
-    registerC = Math.trunc(registerA / 2 ** comboOperand);
+    registerC = registerA / 2n ** comboOperand;
   }
 
   const instructions = [adv, bxl, bst, jnz, bxc, out, bdv, cdv];
 
   while (instructionPointer < program.length) {
-    const opCode = program[instructionPointer];
-    const operand = program[instructionPointer + 1];
+    const opCode = program[Number(instructionPointer)];
+    const operand = program[Number(instructionPointer) + 1];
 
-    instructions[opCode](operand);
+    instructions[Number(opCode)](operand);
 
-    instructionPointer += 2;
+    instructionPointer += 2n;
   }
 
   return outputs;
 }
 
-let registerA = 0;
-const registerB = parseInt(/Register B: (\d+)/.exec(input)![1]);
-const registerC = parseInt(/Register C: (\d+)/.exec(input)![1]);
+let registerA = 0n;
+const registerB = BigInt(parseInt(/Register B: (\d+)/.exec(input)![1]));
+const registerC = BigInt(parseInt(/Register C: (\d+)/.exec(input)![1]));
 
 const program = /Program: (\d.+)/
   .exec(input)![1]
   .split(",")
-  .map((op) => parseInt(op));
+  .map((op) => BigInt(parseInt(op)));
 
 console.log();
 console.log(program.join("\t"));
 
-let j = 0;
+let j = 0n;
 while (true) {
   j++;
-  // if (j > 65) throw new Error("no solution found");
+  // if (j > 65n) throw new Error("no solution found");
 
   const output = runProgram(program, registerA, registerB, registerC);
 
@@ -95,12 +95,12 @@ while (true) {
     break;
   }
 
-  for (let i = 0; i < output.length; i++) {
-    if (program.length - i - 1 === 2) {
+  for (let i = program.length - 1; i >= 0; i--) {
+    if (i === 2) {
       console.log(output.join("\t"));
     }
-    if (output[program.length - i - 1] !== program[program.length - i - 1]) {
-      registerA += 8 ** (program.length - i - 2);
+    if (output.length < i || output[i] !== program[i]) {
+      registerA += 8n ** BigInt(i);
       break;
     }
   }
