@@ -1,12 +1,12 @@
-const test = `
+const testInput = `
 
 `.trim()
 
 console.log('--- P1 test input ---')
-console.log(await program(test))
+console.log(await solution(testInput))
 
-const input = await Bun.file('./input.txt').text()
+const realInput = await Bun.file('./input.txt').text()
 console.log('--- P1 real input ---')
-console.log(await program(input))
+console.log(await solution(realInput))
 
-async function program(input: string) {}
+async function solution(input: string) {}
